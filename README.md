@@ -66,3 +66,8 @@ See [MoeGoe](https://github.com/CjangCjengh/MoeGoe)
 docker run -itd --gpus all --name "Container name" -e NVIDIA_DRIVER_CAPABILITIES=compute,utility -e NVIDIA_VISIBLE_DEVICES=all "Image name"
 ```
 
+
+# My Train
+```bash
+python train_ms.py -c configs/yosuga.json -m yosuga -o /root/tf-logs
+```
