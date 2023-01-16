@@ -2,7 +2,7 @@ import re
 
 
 def japanese_cleaners(text):
-    from text.japanese import japanese_to_romaji_with_accent, japanese_to_ipa, japanese_to_ipa2, japanese_to_ipa3
+    from text.japanese import japanese_to_romaji_with_accent
     text = japanese_to_romaji_with_accent(text)
     text = re.sub(r'([A-Za-z])$', r'\1.', text)
     return text
@@ -13,7 +13,7 @@ def japanese_cleaners2(text):
 
 
 def korean_cleaners(text):
-    from text.korean import latin_to_hangul, number_to_hangul, divide_hangul, korean_to_lazy_ipa, korean_to_ipa
+    from text.korean import latin_to_hangul, number_to_hangul, divide_hangul
     '''Pipeline for Korean text'''
     text = latin_to_hangul(text)
     text = number_to_hangul(text)
@@ -23,7 +23,7 @@ def korean_cleaners(text):
 
 
 def chinese_cleaners(text):
-    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo, chinese_to_romaji, chinese_to_lazy_ipa, chinese_to_ipa, chinese_to_ipa2
+    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo
     '''Pipeline for Chinese text'''
     text = number_to_chinese(text)
     text = chinese_to_bopomofo(text)
@@ -33,8 +33,8 @@ def chinese_cleaners(text):
 
 
 def zh_ja_mixture_cleaners(text):
-    from text.japanese import japanese_to_romaji_with_accent, japanese_to_ipa, japanese_to_ipa2, japanese_to_ipa3
-    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo, chinese_to_romaji, chinese_to_lazy_ipa, chinese_to_ipa, chinese_to_ipa2
+    from text.japanese import japanese_to_romaji_with_accent
+    from text.mandarin import chinese_to_romaji
 
     text = re.sub(r'\[ZH\](.*?)\[ZH\]',
                   lambda x: chinese_to_romaji(x.group(1))+' ', text)
@@ -52,15 +52,11 @@ def sanskrit_cleaners(text):
 
 
 def cjks_cleaners(text):
-    from text.japanese import japanese_to_romaji_with_accent, japanese_to_ipa, japanese_to_ipa2, japanese_to_ipa3
-    from text.korean import latin_to_hangul, number_to_hangul, divide_hangul, korean_to_lazy_ipa, korean_to_ipa
-    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo, chinese_to_romaji, chinese_to_lazy_ipa, chinese_to_ipa, chinese_to_ipa2
+    from text.japanese import japanese_to_ipa
+    from text.korean import korean_to_lazy_ipa
+    from text.mandarin import chinese_to_lazy_ipa
     from text.sanskrit import devanagari_to_ipa
-    from text.english import english_to_lazy_ipa, english_to_ipa2, english_to_lazy_ipa2
-    from text.thai import num_to_thai, latin_to_thai
-    from text.shanghainese import shanghainese_to_ipa
-    from text.cantonese import cantonese_to_ipa
-    from text.ngu_dialect import ngu_dialect_to_ipa
+    from text.english import english_to_lazy_ipa
     text = re.sub(r'\[ZH\](.*?)\[ZH\]',
                   lambda x: chinese_to_lazy_ipa(x.group(1))+' ', text)
     text = re.sub(r'\[JA\](.*?)\[JA\]',
@@ -77,15 +73,10 @@ def cjks_cleaners(text):
 
 
 def cjke_cleaners(text):
-    from text.japanese import japanese_to_romaji_with_accent, japanese_to_ipa, japanese_to_ipa2, japanese_to_ipa3
-    from text.korean import latin_to_hangul, number_to_hangul, divide_hangul, korean_to_lazy_ipa, korean_to_ipa
-    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo, chinese_to_romaji, chinese_to_lazy_ipa, chinese_to_ipa, chinese_to_ipa2
-    from text.sanskrit import devanagari_to_ipa
-    from text.english import english_to_lazy_ipa, english_to_ipa2, english_to_lazy_ipa2
-    from text.thai import num_to_thai, latin_to_thai
-    from text.shanghainese import shanghainese_to_ipa
-    from text.cantonese import cantonese_to_ipa
-    from text.ngu_dialect import ngu_dialect_to_ipa
+    from text.japanese import japanese_to_ipa
+    from text.korean import  korean_to_ipa
+    from text.english import english_to_ipa2
+    from text.mandarin import chinese_to_lazy_ipa
     text = re.sub(r'\[ZH\](.*?)\[ZH\]', lambda x: chinese_to_lazy_ipa(x.group(1)).replace(
         'ʧ', 'tʃ').replace('ʦ', 'ts').replace('ɥan', 'ɥæn')+' ', text)
     text = re.sub(r'\[JA\](.*?)\[JA\]', lambda x: japanese_to_ipa(x.group(1)).replace('ʧ', 'tʃ').replace(
@@ -100,15 +91,10 @@ def cjke_cleaners(text):
 
 
 def cjke_cleaners2(text):
-    from text.japanese import japanese_to_romaji_with_accent, japanese_to_ipa, japanese_to_ipa2, japanese_to_ipa3
-    from text.korean import latin_to_hangul, number_to_hangul, divide_hangul, korean_to_lazy_ipa, korean_to_ipa
-    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo, chinese_to_romaji, chinese_to_lazy_ipa, chinese_to_ipa, chinese_to_ipa2
-    from text.sanskrit import devanagari_to_ipa
-    from text.english import english_to_lazy_ipa, english_to_ipa2, english_to_lazy_ipa2
-    from text.thai import num_to_thai, latin_to_thai
-    from text.shanghainese import shanghainese_to_ipa
-    from text.cantonese import cantonese_to_ipa
-    from text.ngu_dialect import ngu_dialect_to_ipa
+    from text.japanese import japanese_to_ipa2
+    from text.korean import korean_to_ipa
+    from text.mandarin import chinese_to_ipa
+    from text.english import english_to_ipa2
     text = re.sub(r'\[ZH\](.*?)\[ZH\]',
                   lambda x: chinese_to_ipa(x.group(1))+' ', text)
     text = re.sub(r'\[JA\](.*?)\[JA\]',
@@ -137,12 +123,9 @@ def shanghainese_cleaners(text):
 
 
 def chinese_dialect_cleaners(text):
-    from text.japanese import japanese_to_romaji_with_accent, japanese_to_ipa, japanese_to_ipa2, japanese_to_ipa3
-    from text.korean import latin_to_hangul, number_to_hangul, divide_hangul, korean_to_lazy_ipa, korean_to_ipa
-    from text.mandarin import number_to_chinese, chinese_to_bopomofo, latin_to_bopomofo, chinese_to_romaji, chinese_to_lazy_ipa, chinese_to_ipa, chinese_to_ipa2
-    from text.sanskrit import devanagari_to_ipa
-    from text.english import english_to_lazy_ipa, english_to_ipa2, english_to_lazy_ipa2
-    from text.thai import num_to_thai, latin_to_thai
+    from text.japanese import japanese_to_ipa3
+    from text.mandarin import  chinese_to_ipa2
+    from text.english import english_to_lazy_ipa2
     from text.shanghainese import shanghainese_to_ipa
     from text.cantonese import cantonese_to_ipa
     from text.ngu_dialect import ngu_dialect_to_ipa
